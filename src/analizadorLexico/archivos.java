@@ -48,6 +48,10 @@ class archivos {
                 case IDENTIFICADOR:
                 case RESERVADA:
                 case NUMERO:
+                case ARITMETICOS:
+                case ASIGNACION:
+                case RELACIONALES:
+                case SIMBOLO:
                     System.out.println("TOKEN: " + token + " " + lexer.lexeme);
                     break;
                 case ERROR:

@@ -27,9 +27,14 @@ public String lexeme;
 %%
 
 ({INICIO}|{FIN}|{CLASS}|{IF}|{ELSE}|{INT}|{STRING}|{PRINTF}) {lexeme=yytext(); return RESERVADA;}
+("+"|"-"|"/"|"*") {lexeme=yytext(); return ARITMETICOS;}
+"=" {lexeme=yytext(); return ASIGNACION;}
+("<"|"<="|">"|">="|"=="|"!=") {lexeme=yytext(); return RELACIONALES;}
+(";"|","|"("|")"|"["|"]"|"{"|"}"|"\"") {lexeme=yytext(); return SIMBOLO;}
 
 {M}({L}|{N})* {lexeme=yytext(); return IDENTIFICADOR;}
--?{DecIntegerLiteral} {lexeme=yytext(); return NUMERO;}
+"-"?{DecIntegerLiteral} {lexeme=yytext(); return NUMERO;}
+
 {ESPECIALES}+ {/* ignore */}
 "//".* {/* ignore */}
- . {lexeme=yytext(); return ERROR;}
+[^] {lexeme=yytext(); return ERROR;}

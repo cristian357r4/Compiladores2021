@@ -1,5 +1,1 @@
-Inicio class programa1{
-int producto;
-producto=-55*-231;
-printf("Resultado", producto);
-}Fin
+"hola esto es un string"
