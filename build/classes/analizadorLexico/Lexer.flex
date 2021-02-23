@@ -34,7 +34,8 @@ public String lexeme;
 
 {M}({L}|{N})* {lexeme=yytext(); return IDENTIFICADOR;}
 "-"?{DecIntegerLiteral} {lexeme=yytext(); return NUMERO;}
-
+{DecIntegerLiteral}({M}|{L}|{N})+ {lexeme=yytext(); return DESCONOCIDO;}
+"=!" {lexeme=yytext(); return DESCONOCIDO;}
 {ESPECIALES}+ {/* ignore */}
 "//".* {/* ignore */}
-[^] {lexeme=yytext(); return ERROR;}
+[^]+ {lexeme=yytext(); return ERROR;}

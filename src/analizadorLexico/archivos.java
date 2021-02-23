@@ -52,6 +52,7 @@ class archivos {
                 case ASIGNACION:
                 case RELACIONALES:
                 case SIMBOLO:
+                case DESCONOCIDO:
                     System.out.println("TOKEN: " + token + " " + lexer.lexeme);
                     break;
                 case ERROR:

@@ -1,1 +1,12 @@
-"hola esto es un string"
+//comentario
+ 
+"hola compiladores"
+  
+hol"aaa
+ 
+a==b!=c
+   
+95b =! h5 
+@#
+  
+ç
