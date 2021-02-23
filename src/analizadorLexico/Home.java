@@ -5,7 +5,10 @@
  */
 package analizadorLexico;
 
+import java.io.IOException;
 import static java.lang.System.exit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -169,17 +172,14 @@ public class Home extends javax.swing.JFrame {
         tblTokens.setAutoCreateRowSorter(true);
         tblTokens.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
-                "Token", "Lexema", "Linea", "Columna", "Indice"
+                "Token", "Lexema", "Linea", "Columna"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class
+                java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -198,8 +198,6 @@ public class Home extends javax.swing.JFrame {
             tblTokens.getColumnModel().getColumn(2).setPreferredWidth(3);
             tblTokens.getColumnModel().getColumn(3).setResizable(false);
             tblTokens.getColumnModel().getColumn(3).setPreferredWidth(3);
-            tblTokens.getColumnModel().getColumn(4).setResizable(false);
-            tblTokens.getColumnModel().getColumn(4).setPreferredWidth(3);
         }
 
         pnlBackG.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 300, 620, 240));
@@ -227,7 +225,12 @@ public class Home extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void pnlAnalizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlAnalizarMouseClicked
-        
+         try {
+            archivos ar = new archivos();
+            ar.probarLexerFile(txtAnalisis,tblTokens);// TODO add your handling code here:
+        } catch (IOException ex) {
+            Logger.getLogger(interfaz.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_pnlAnalizarMouseClicked
 
     private void pnlLimpiarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlLimpiarMouseClicked

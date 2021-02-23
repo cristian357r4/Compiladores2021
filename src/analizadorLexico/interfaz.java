@@ -130,12 +130,12 @@ public class interfaz extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAnalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnalizarActionPerformed
-        try {
-            archivos ar = new archivos();
-            ar.probarLexerFile(jTextCodigo);// TODO add your handling code here:
-        } catch (IOException ex) {
-            Logger.getLogger(interfaz.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//        try {
+//            archivos ar = new archivos();
+//            ar.probarLexerFile(jTextCodigo,);// TODO add your handling code here:
+//        } catch (IOException ex) {
+//            Logger.getLogger(interfaz.class.getName()).log(Level.SEVERE, null, ex);
+//        }
     }//GEN-LAST:event_btnAnalizarActionPerformed
   
     /**

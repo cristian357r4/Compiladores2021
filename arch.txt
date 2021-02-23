@@ -1,3 +1,1 @@
-inx xxx =99;
-
-class
+int hola = 88;

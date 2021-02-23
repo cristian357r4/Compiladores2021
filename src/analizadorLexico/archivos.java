@@ -15,7 +15,9 @@ import java.io.PrintWriter;
 import java.io.Reader;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JTable;
 import javax.swing.JTextArea;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -23,8 +25,9 @@ import javax.swing.JTextArea;
  */
 class archivos {
 
-    public void probarLexerFile(JTextArea area) throws IOException {
+    public void probarLexerFile(JTextArea area, JTable tbTokens) throws IOException {
         int contIDs = 0;
+        DefaultTableModel model = (DefaultTableModel) tbTokens.getModel();
 
         File fichero = new File("arch.txt");
         PrintWriter writer;
@@ -53,13 +56,17 @@ class archivos {
                 case RELACIONALES:
                 case SIMBOLO:
                 case DESCONOCIDO:
+                    model.addRow(new Object[]{token, lexer.lexeme, lexer.line, lexer.column});
                     System.out.println("TOKEN: " + token + " " + lexer.lexeme+" "+lexer.column+" "+lexer.line);
                     break;
                 case ERROR:
                     System.out.println("TOKEN: " + token + " " + lexer.lexeme+" "+lexer.column+" "+lexer.line);
+                    model.addRow(new Object[]{token, lexer.lexeme, lexer.line, lexer.column});
+
                     break;
                 
             }
+            tbTokens.setModel(model);
         }
     }
 

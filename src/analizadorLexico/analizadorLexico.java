@@ -41,7 +41,7 @@ public class analizadorLexico {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-       interfaz ventana = new interfaz();
+       Home ventana = new Home();
        ventana.setVisible(true);
         String path = "src/analizadorLexico/Lexer.flex";
         generarLexer(path);
