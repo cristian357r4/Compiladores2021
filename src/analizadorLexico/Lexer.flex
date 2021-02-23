@@ -3,6 +3,8 @@ import static analizadorLexico.Token.*;
 %%
 %class Lexer
 %type Token
+%column
+%line
 M=[a-z_]
 L=[a-zA-Z_]
 
@@ -23,19 +25,21 @@ ESPECIALES = {LineTerminator} | [ \t\f]
 
 %{
 public String lexeme;
+public int column;
+public int line;
 %}
 %%
 
-({INICIO}|{FIN}|{CLASS}|{IF}|{ELSE}|{INT}|{STRING}|{PRINTF}) {lexeme=yytext(); return RESERVADA;}
-("+"|"-"|"/"|"*") {lexeme=yytext(); return ARITMETICOS;}
-"=" {lexeme=yytext(); return ASIGNACION;}
-("<"|"<="|">"|">="|"=="|"!=") {lexeme=yytext(); return RELACIONALES;}
-(";"|","|"("|")"|"["|"]"|"{"|"}"|"\"") {lexeme=yytext(); return SIMBOLO;}
+({INICIO}|{FIN}|{CLASS}|{IF}|{ELSE}|{INT}|{STRING}|{PRINTF}) {lexeme=yytext(); column= yycolumn; line=yyline; return RESERVADA;}
+("+"|"-"|"/"|"*") {lexeme=yytext(); column= yycolumn; line=yyline; return ARITMETICOS;}
+"=" {lexeme=yytext(); column= yycolumn; line=yyline; return ASIGNACION;}
+("<"|"<="|">"|">="|"=="|"!=") {lexeme=yytext(); column= yycolumn; line=yyline; return RELACIONALES;}
+(";"|","|"("|")"|"["|"]"|"{"|"}"|"\"") {lexeme=yytext(); column= yycolumn; line=yyline; return SIMBOLO;}
 
-{M}({L}|{N})* {lexeme=yytext(); return IDENTIFICADOR;}
-"-"?{DecIntegerLiteral} {lexeme=yytext(); return NUMERO;}
-{DecIntegerLiteral}({M}|{L}|{N})+ {lexeme=yytext(); return DESCONOCIDO;}
-"=!" {lexeme=yytext(); return DESCONOCIDO;}
+{M}({L}|{N})* {lexeme=yytext(); column= yycolumn; line=yyline; return IDENTIFICADOR;}
+"-"?{DecIntegerLiteral} {lexeme=yytext(); column= yycolumn; line=yyline; return NUMERO;}
+{DecIntegerLiteral}({M}|{L}|{N})+ {lexeme=yytext(); column= yycolumn; line=yyline; return DESCONOCIDO;}
+"=!" {lexeme=yytext(); column= yycolumn; line=yyline; return DESCONOCIDO;}
 {ESPECIALES}+ {/* ignore */}
 "//".* {/* ignore */}
-[^]+ {lexeme=yytext(); return ERROR;}
+[^] {lexeme=yytext(); column= yycolumn; line=yyline; return ERROR;}

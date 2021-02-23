@@ -53,9 +53,9 @@ class Lexer {
 
   private static final String ZZ_ACTION_PACKED_0 =
     "\1\0\1\1\1\2\2\3\1\1\2\2\1\1\3\2"+
-    "\1\4\3\5\1\6\1\7\1\1\1\10\1\11\1\1"+
-    "\1\2\1\12\1\2\1\1\3\2\2\3\1\4\1\7"+
-    "\1\11\1\1\1\2\1\12\3\2\1\1\3\2\1\1"+
+    "\1\4\3\5\1\6\1\7\1\1\1\10\1\11\1\0"+
+    "\1\2\1\12\1\2\1\0\3\2\2\3\1\4\1\7"+
+    "\1\11\1\0\1\2\1\12\3\2\1\0\3\2\1\0"+
     "\2\2";
 
   private static int [] zzUnpackAction() {
@@ -118,22 +118,22 @@ class Lexer {
     "\1\2\1\3\1\2\1\4\1\5\1\6\1\3\1\7"+
     "\1\10\1\3\1\11\2\3\1\12\1\3\1\13\3\3"+
     "\1\14\2\15\1\16\1\17\1\20\1\21\1\22\1\23"+
-    "\1\24\40\2\23\3\13\2\2\25\2\4\17\25\13\2"+
-    "\23\25\20\2\1\26\30\2\5\3\1\27\7\3\1\30"+
-    "\5\3\13\2\12\3\1\31\10\3\21\2\1\32\27\2"+
-    "\17\3\1\33\3\3\13\2\12\3\1\34\10\3\13\2"+
-    "\20\3\1\35\2\3\36\2\2\15\13\2\1\36\1\37"+
-    "\61\2\1\40\36\2\1\41\1\2\1\42\33\2\1\41"+
-    "\13\2\1\43\27\2\17\3\1\30\3\3\13\2\13\3"+
-    "\1\44\7\3\20\2\1\45\30\2\20\3\1\46\2\3"+
-    "\13\2\14\3\1\47\6\3\13\2\6\3\1\50\14\3"+
-    "\15\2\2\36\31\2\24\40\1\2\10\40\11\2\1\51"+
-    "\26\2\14\3\1\52\6\3\13\2\6\3\1\53\14\3"+
-    "\13\2\16\3\1\30\4\3\13\2\5\3\1\54\15\3"+
-    "\21\2\1\55\27\2\14\3\1\30\6\3\13\2\5\3"+
-    "\1\56\15\3\13\2\17\3\1\57\3\3\23\2\1\45"+
-    "\25\2\21\3\1\30\1\3\13\2\15\3\1\30\5\3"+
-    "\12\2";
+    "\1\24\1\2\37\0\23\3\13\0\2\25\2\4\17\25"+
+    "\13\0\23\25\20\0\1\26\30\0\5\3\1\27\7\3"+
+    "\1\30\5\3\13\0\12\3\1\31\10\3\21\0\1\32"+
+    "\27\0\17\3\1\33\3\3\13\0\12\3\1\34\10\3"+
+    "\13\0\20\3\1\35\2\3\36\0\2\15\13\0\1\36"+
+    "\1\37\61\0\1\40\36\0\1\41\1\0\1\42\33\0"+
+    "\1\41\13\0\1\43\27\0\17\3\1\30\3\3\13\0"+
+    "\13\3\1\44\7\3\20\0\1\45\30\0\20\3\1\46"+
+    "\2\3\13\0\14\3\1\47\6\3\13\0\6\3\1\50"+
+    "\14\3\15\0\2\36\31\0\24\40\1\0\10\40\11\0"+
+    "\1\51\26\0\14\3\1\52\6\3\13\0\6\3\1\53"+
+    "\14\3\13\0\16\3\1\30\4\3\13\0\5\3\1\54"+
+    "\15\3\21\0\1\55\27\0\14\3\1\30\6\3\13\0"+
+    "\5\3\1\56\15\3\13\0\17\3\1\57\3\3\23\0"+
+    "\1\45\25\0\21\3\1\30\1\3\13\0\15\3\1\30"+
+    "\5\3\12\0";
 
   private static int [] zzUnpackTrans() {
     int [] result = new int[1140];
@@ -174,7 +174,9 @@ class Lexer {
   private static final int [] ZZ_ATTRIBUTE = zzUnpackAttribute();
 
   private static final String ZZ_ATTRIBUTE_PACKED_0 =
-    "\1\0\56\1";
+    "\1\0\1\11\13\1\1\11\5\1\1\11\1\1\1\0"+
+    "\3\1\1\0\4\1\1\11\1\1\2\11\1\0\1\1"+
+    "\1\11\3\1\1\0\3\1\1\0\2\1";
 
   private static int [] zzUnpackAttribute() {
     int [] result = new int[47];
@@ -254,6 +256,8 @@ class Lexer {
 
   /* user code: */
 public String lexeme;
+public int column;
+public int line;
 
 
   /**
@@ -503,6 +507,62 @@ public String lexeme;
     while (true) {
       zzMarkedPosL = zzMarkedPos;
 
+      boolean zzR = false;
+      int zzCh;
+      int zzCharCount;
+      for (zzCurrentPosL = zzStartRead  ;
+           zzCurrentPosL < zzMarkedPosL ;
+           zzCurrentPosL += zzCharCount ) {
+        zzCh = Character.codePointAt(zzBufferL, zzCurrentPosL, zzMarkedPosL);
+        zzCharCount = Character.charCount(zzCh);
+        switch (zzCh) {
+        case '\u000B':
+        case '\u000C':
+        case '\u0085':
+        case '\u2028':
+        case '\u2029':
+          yyline++;
+          yycolumn = 0;
+          zzR = false;
+          break;
+        case '\r':
+          yyline++;
+          yycolumn = 0;
+          zzR = true;
+          break;
+        case '\n':
+          if (zzR)
+            zzR = false;
+          else {
+            yyline++;
+            yycolumn = 0;
+          }
+          break;
+        default:
+          zzR = false;
+          yycolumn += zzCharCount;
+        }
+      }
+
+      if (zzR) {
+        // peek one character ahead if it is \n (if we have counted one line too much)
+        boolean zzPeek;
+        if (zzMarkedPosL < zzEndReadL)
+          zzPeek = zzBufferL[zzMarkedPosL] == '\n';
+        else if (zzAtEOF)
+          zzPeek = false;
+        else {
+          boolean eof = zzRefill();
+          zzEndReadL = zzEndRead;
+          zzMarkedPosL = zzMarkedPos;
+          zzBufferL = zzBuffer;
+          if (eof) 
+            zzPeek = false;
+          else 
+            zzPeek = zzBufferL[zzMarkedPosL] == '\n';
+        }
+        if (zzPeek) yyline--;
+      }
       zzAction = -1;
 
       zzCurrentPosL = zzCurrentPos = zzStartRead = zzMarkedPosL;
@@ -565,15 +625,15 @@ public String lexeme;
 
       switch (zzAction < 0 ? zzAction : ZZ_ACTION[zzAction]) {
         case 1: 
-          { lexeme=yytext(); return ERROR;
+          { lexeme=yytext(); column= yycolumn; line=yyline; return ERROR;
           }
         case 11: break;
         case 2: 
-          { lexeme=yytext(); return IDENTIFICADOR;
+          { lexeme=yytext(); column= yycolumn; line=yyline; return IDENTIFICADOR;
           }
         case 12: break;
         case 3: 
-          { lexeme=yytext(); return NUMERO;
+          { lexeme=yytext(); column= yycolumn; line=yyline; return NUMERO;
           }
         case 13: break;
         case 4: 
@@ -581,27 +641,27 @@ public String lexeme;
           }
         case 14: break;
         case 5: 
-          { lexeme=yytext(); return ARITMETICOS;
+          { lexeme=yytext(); column= yycolumn; line=yyline; return ARITMETICOS;
           }
         case 15: break;
         case 6: 
-          { lexeme=yytext(); return ASIGNACION;
+          { lexeme=yytext(); column= yycolumn; line=yyline; return ASIGNACION;
           }
         case 16: break;
         case 7: 
-          { lexeme=yytext(); return RELACIONALES;
+          { lexeme=yytext(); column= yycolumn; line=yyline; return RELACIONALES;
           }
         case 17: break;
         case 8: 
-          { lexeme=yytext(); return SIMBOLO;
+          { lexeme=yytext(); column= yycolumn; line=yyline; return SIMBOLO;
           }
         case 18: break;
         case 9: 
-          { lexeme=yytext(); return DESCONOCIDO;
+          { lexeme=yytext(); column= yycolumn; line=yyline; return DESCONOCIDO;
           }
         case 19: break;
         case 10: 
-          { lexeme=yytext(); return RESERVADA;
+          { lexeme=yytext(); column= yycolumn; line=yyline; return RESERVADA;
           }
         case 20: break;
         default: 

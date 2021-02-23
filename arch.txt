@@ -1,12 +1,3 @@
-//comentario
- 
-"hola compiladores"
-  
-hol"aaa
- 
-a==b!=c
-   
-95b =! h5 
-@#
-  
-ç
+inx xxx =99;
+
+class

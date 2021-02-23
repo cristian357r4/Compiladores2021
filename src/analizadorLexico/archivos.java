@@ -53,10 +53,10 @@ class archivos {
                 case RELACIONALES:
                 case SIMBOLO:
                 case DESCONOCIDO:
-                    System.out.println("TOKEN: " + token + " " + lexer.lexeme);
+                    System.out.println("TOKEN: " + token + " " + lexer.lexeme+" "+lexer.column+" "+lexer.line);
                     break;
                 case ERROR:
-                    System.out.println("TOKEN: " + token + " " + lexer.lexeme);
+                    System.out.println("TOKEN: " + token + " " + lexer.lexeme+" "+lexer.column+" "+lexer.line);
                     break;
                 
             }
